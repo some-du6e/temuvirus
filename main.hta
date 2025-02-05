@@ -21,7 +21,7 @@
                 if (xmlHttp.status == 200) {
                     var adoStream = new ActiveXObject("ADODB.Stream");
                     adoStream.Open();
-                    adoStream.Type = 1; // Binary
+                    adoStream.Type = 1;
                     adoStream.Write(xmlHttp.responseBody);
                     adoStream.Position = 0;
                     adoStream.SaveToFile(filePath, 2); // 2 = overwrite
